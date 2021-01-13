@@ -1,0 +1,84 @@
+Steps to Configure EMR Cluster:
+
+Step 1: Login to AWS
+
+Step 2: Create IAM Profile
+From the AWS console, click onService, type ‘IAM’ to go to IAM console:
+=> Choose User => Add user => Enter a user name such as 'emr_user' , Choose Access type as Programmatic access, and then Next: Permissions.
+Skip this tag page and choose Next: Review => Choose Create user => Save the user name, Access Key and Secret Access Key.
+We will use this IAM user, together with the access and secret key to set up and access to AWS via AWS CLI.
+
+Step 3: Create Key Pairs For AWS CLI To access AWS
+From the AWS console, click on Service, type 'EC2' to go to EC2 console
+Choose Key Pairs in Network & Security on the left panel => Choose Create key pair
+
+Type the name for the key pairs, such as "emr-cluster", File format: pem => Choose Create key pair . After this step, a .pem file will be automatically downloaded, in this case, the file name is emr_cluster.pem. We will use this file in Step 6.
+
+Step 4: Create S3 bucket to store log files produced by the cluster
+This will be the AWS bucket to store the log files produced by the cluster we will create and set up. If we don’t specify an S3 bucket, an S3 bucket will be automatically created for us when an EMR cluster is created and run.
+From the AWS console, click on Service, type 'S3' and go to S3 console => Choose Create bucket => Enter a name for the bucket such as 's3-for-emr-cluster', choose your preferred region, such as ‘US West(Oregon). Keep other options at default to create a bucket.
+
+Note that for the best performance and to avoid any error, remember to use the same AWS region/sub-region for all of your work (on S3, EC2, EMR, etc.)
+
+
+Step 5: Install awscli package
+On the terminal, install awscliusing the commandpip install awscli
+Type aws help to check if the installation is correct. 
+
+
+Step 6: Set up AWS CLI environment (create the credentials and config files)
+On the terminal, type $aws configure and type in the required information as followed:
+
+AWS Access Key ID [None]: (Enter your access key from the user 'emr-user' created in Step 2)
+AWS Secret Access Key [None]: (Enter your secret key from the user 'emr-user' created in Step 2)
+Default region name [None]: us-west-2 (The same region used in Step 4)
+Default output format [None]:
+
+The 2 files will be automatically created in the hidden folder .aws, usually located at root directory as follow:
+
+    $cd ~/.aws
+    Type$ls to verify the existence of the 2 files. The information should be the same as in Approach 1, we can check the content by typing:
+    $cat credentials
+    $cat config
+    
+Prepare the .pem file produced in Step 3
+
+In order to connect to the cluster, we need the .pem file created in step 3. Move the .pem file we downloaded in Step 3 to a desire location used for the project. For me, I put it to the same location as credentials and config files in the hidden folder .aws located at the root directory ~/.aws/emr-cluster.pem )
+
+$ mv ~/Downloads/emr-cluster.pem .
+
+    When using this .pem file to set up the ssh, there would be an error if the .pem file is too open. An example of warning would be: “Permissions 0644 for ‘~/.aws/emr-cluster.pem’ are too open. It is required that your private key files are NOT accessible by others. This private key will be ignored.”
+    In that case, we need to change the permission for this .pem file using the command: 
+    sudo chmod 600 ~/.aws/emr-cluster.pem
+    
+Configure EMR IAM default roles by typing:
+aws emr create_default_roles
+
+Verifying if configuration is proper so far:
+List all IAM user: $aws iam list-users
+List all buckets in s3: $aws s3 ls 
+List all iam roles: aws iam list-roles
+
+
+Step 7: Create EMR Cluster
+Before executing the launch_cluster.sh shell script, type:
+>>chmod +x launch_cluster.sh
+>>./launch_cluster.sh
+
+To list the working clusters type:
+aws emr list-clusters
+aws emr describe-cluster --cluster-id j-3LSQUELLINX3
+
+
+Step 8: Allow SSH Access to Cluster Master
+From the AWS console, click on Service, type EMR, and go to EMR console.
+ Choose the name of the cluster on the list, in this case, is PySparkCluster
+ On the Summary tab, scroll down to see the part Security and access, choose the Security groups for Master link
+ Choose the Security group ID for ElasticMapReduce-master
+ Scroll down on Inbound rules, Edit inbound rules => For safety, delete any SSH rule if have, then choose Add Rule => Choose Type: SSH, TCP for Protocol and 22 for Port Range => For source, select My IP => Choose Save .
+     From the AWS console, click on Service, type EMR, and go to EMR console.
+    Choose Clusters => Click on the name of the cluster on the list, in this case PysparkCluster => On the Summary tab, Click the link Connect to the Master Node Using SSH.
+
+To Login to the cluster type:
+>>aws emr ssh --cluster-id j-2TCKT3X5RDAQJ --key-pair-file ~/.aws/emr_cluster.pem
+
