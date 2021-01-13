@@ -82,3 +82,9 @@ From the AWS console, click on Service, type EMR, and go to EMR console.
 To Login to the cluster type:
 >>aws emr ssh --cluster-id j-2TCKT3X5RDAQJ --key-pair-file ~/.aws/emr_cluster.pem
 
+Steps to Execute the pySpark Pipeline:
+hadoop> source config_spark_env
+hadoop> spark-submit --master yarn ./main.py
+
+To store files in S3 bucket type:
+hadoop> aws s3 cp s3://s3-aka-emr-cluster/results/results.txt
