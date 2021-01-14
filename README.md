@@ -38,6 +38,8 @@ which is equally likely to occur in the positive, negative, neutral class can be
 
 ![](images/image3.jpg)
 
+However, if the best case logistic Regression + TFIDF model was trained only on the positive and negative classes, we get a positive class precision of 92% and a negative class precision of 83%. This further confirms the hypothesis that neutral class data which is neutral-positive in character can be classified as positive or neutral-negative sounding text can be misclassified as negative.
+
 Notes:
 
 The instructions to launch the AWS EMR cluster and execute the code are under /scripts/AWS_EMR_Configure_Instructions.
