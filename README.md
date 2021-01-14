@@ -22,7 +22,7 @@ The feature data was processed using the pySpark feature pipeline shown in the i
 The following AWS architecture was launched to run the pySpark feature pipeline and machine learning models: 
 ![](images/image2.jpg)
 
-A total of 12 cluster nodes were used to deploy the above pipeline. The big data model yielded better performance compared to the baseline prototype model.
+A total of 12 cluster nodes were used to deploy the above pipeline. The big data model yielded better performance compared to the baseline prototype model. This model can be scaled up to handle larger chunks of data by allocating more cluster nodes in the launch cluster script depending on the user requirements.
 
 Results:
 
