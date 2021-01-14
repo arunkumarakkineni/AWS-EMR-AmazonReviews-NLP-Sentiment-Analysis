@@ -7,6 +7,7 @@ Amazon Review Data (2018) was sourced from deepyeti.ucsd.edu/jianmo/amazon/index
 The per category review data was unzipped and stored in the Amazon S3 bucket.
 
 
+
 Feature Data Pipeline:
 
 
@@ -17,10 +18,12 @@ The feature data was processed using the pySpark feature pipeline shown in the i
 
 ![](images/image1.jpg)
 
+
 The following AWS architecture was launched to run the pySpark feature pipeline and machine learning models: 
 ![](images/image2.jpg)
 
 A total of 12 cluster nodes were used to deploy the above pipeline. The big data model yielded better performance compared to the baseline prototype model.
+
 
 Notes:
 
