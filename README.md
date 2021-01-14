@@ -26,13 +26,17 @@ A total of 12 cluster nodes were used to deploy the above pipeline. The big data
 
 Results:
 
-For the three class label case, the following results were obtained:
+For the three class label case, the following results were obtained for the best case Logistic Regression + TFIDF model:
 
 81% Precision Positive Sentiment Class,
 72% Precision For Negative Sentiment Class,
 55% Precision For Neutral Sentiment Class
 
 The low precision for the neutral class can be explained by the classification of the neutral positive text as positive or the neutral negative text as negative.
+This phenomenon can be further understood by exploring the feature importances of neutral words with high gini coefficients. In the graphs below we observe that the word 'would'
+which is equally likely to occur in the positive, negative, neutral class can be misclassified as positive if positive sounding text like 'would have' had occured or as negative if 'would not' occured.
+
+![](images/image3.jpg)
 
 Notes:
 
