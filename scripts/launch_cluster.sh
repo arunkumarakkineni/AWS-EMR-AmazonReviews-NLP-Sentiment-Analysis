@@ -5,7 +5,7 @@
 #   name of key file - without .pem extension
 #   number of slave instances
 #      ex. bash launch_cluster.sh mybucket mypem 2
-
+# >>./launch_cluster.sh s3-aka-emr-cluster emr_cluster 4
 # This script assumes that the file bootstrap-emr.sh is
 #   in your current directory.
 
