@@ -5,6 +5,8 @@ did extensive data cleaning, feature engineering, data visualization, and built 
 The prototype model Jupyter Notebook can be found in /prototype/
 
 Notes:
+
 The instructions to launch the AWS EMR cluster and execute the code are under /scripts/AWS_EMR_Configure_Instructions.
+
 The source files are under /src/
 
