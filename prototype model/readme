@@ -1,1 +1,1 @@
-This Jupyter Notebook implements a Random forest Model
+This Jupyter Notebook implements a baseline Random forest Model and does a feature analysis of features with high gini index.
