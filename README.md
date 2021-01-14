@@ -42,7 +42,9 @@ However, if the best case logistic Regression + TFIDF model was trained only on 
 
 
 Tech Stack Used:
+
 AWS (S3 bucket, boto3, Dynamo DB, PySpark EMR), Yarn, hadoop
+
 Scikit-learn, seaborn, python, pySpark ML, pySpark SQL, Numpy, Pandas, NLTK-NLP
 
 
