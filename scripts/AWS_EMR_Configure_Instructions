@@ -63,7 +63,7 @@ List all iam roles: aws iam list-roles
 Step 7: Create EMR Cluster
 Before executing the launch_cluster.sh shell script, type:
 >>chmod +x launch_cluster.sh
->>./launch_cluster.sh
+>>./launch_cluster.sh s3-aka-emr-cluster emr_cluster 12
 
 To list the working clusters type:
 aws emr list-clusters
