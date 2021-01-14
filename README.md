@@ -3,9 +3,9 @@ AWS cloud deployment of big data train/test pipeline of gigabyte scale NLP machi
 did extensive data cleaning, feature engineering, data visualization, and built prototype models to investigate the underlying data using sci-kit learn and seaborn.
 
 
-![](image1.jpg)
+![](images/image1.jpg)
 
-![](image2.jpg)
+![](images/image2.jpg)
 
 Notes:
 
